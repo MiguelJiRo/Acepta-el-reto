@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-void resuelveCaso(int a, int b[]);
+int resuelveCaso(int a, int b[]);
 
 int main() {
 	// Para la entrada por fichero.
@@ -22,7 +22,7 @@ int main() {
 		for (int i = 0; i < numCasos; ++i) {
 			cin >> arrayMontes[i];
 		}
-		resuelveCaso(numCasos, arrayMontes);
+		cout << resuelveCaso(numCasos, arrayMontes) << "\n";
 		cin >> numCasos;
 	}
 	//#ifndef DOMJUDGE // para dejar todo como estaba al principio
@@ -32,7 +32,9 @@ int main() {
 	return 0;
 }
 
-void resuelveCaso(int a, int b[])
+
+// { Pre: 0 <= a <= longitud(b) }
+int resuelveCaso(int a, int b[])
 {	
 	/*int cont = 0;
 	bool correcto = true;
@@ -48,11 +50,16 @@ void resuelveCaso(int a, int b[])
 
 	int cont = 1, siguiente = b[a - 1];
 
+	/* { I : a - 2 <= i <= 0
+			^ cont : 0 <= i < j < a : v[i] > v[j]}
+	*/
 	for (int i = a - 2; i >= 0; --i) {
 		if (b[i] > siguiente) {
 			cont++;
 			siguiente = b[i];
 		}
 	}
-	cout << cont << endl;
+	return cont;
 }
+
+// { Post: cont : # i : 0 <= i < j < a : v[i] > v[j] }
